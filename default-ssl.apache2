@@ -1,0 +1,31 @@
+<IfModule mod_ssl.c>
+    <VirtualHost _default_:443>
+        ServerAdmin webmaster@localhost
+        ServerName apifocal.com
+        DocumentRoot /var/www/hello
+
+        AddHandler cgi-script .cgi .pl
+        DirectoryIndex index.cgi index.htm index.html index.php index.pl;
+
+        <Directory /var/www/hello>
+            AllowOverride All
+            IndexOptions +XHTML
+            Options Indexes FollowSymLinks MultiViews ExecCGI
+            Require all granted
+        </Directory>
+
+        SSLEngine on
+        SSLCertificateFile      /etc/ssl/certs/fullchain.pem
+        SSLCertificateKeyFile   /etc/ssl/private/privkey.key
+
+        <FilesMatch "\.(cgi|shtml|phtml|php)$">
+            SSLOptions +StdEnvVars
+        </FilesMatch>
+        <Directory /usr/lib/cgi-bin>
+            SSLOptions +StdEnvVars
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+</IfModule>

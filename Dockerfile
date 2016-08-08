@@ -12,11 +12,13 @@ RUN chown --recursive root:root /var/www/hello
 
 # Configure: httpd
 ADD default.apache2 /etc/apache2/sites-available/000-default.conf
-RUN a2enmod actions cgid
+ADD default-ssl.apache2 /etc/apache2/sites-available/default-ssl.conf
+RUN a2enmod actions cgid ssl && \
+  a2ensite default-ssl
 
 #TODO: add support for php-fastcgi
 
 # Configure: supervisor
 ADD supervisord.apache2.conf /etc/supervisor/conf.d/apache2.conf
 
-EXPOSE 80/tcp
+EXPOSE 80/tcp 443/tcp

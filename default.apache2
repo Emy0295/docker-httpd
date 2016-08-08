@@ -1,6 +1,6 @@
 <VirtualHost _default_:*>
 	ServerAdmin webmaster@localhost
-	#ServerName www.example.com
+	ServerName apifocal.com
 	DocumentRoot /var/www/hello
 
 	AddHandler cgi-script .cgi .pl
