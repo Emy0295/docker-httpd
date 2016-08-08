@@ -18,6 +18,5 @@ RUN a2enmod actions cgid
 
 # Configure: supervisor
 ADD supervisord.apache2.conf /etc/supervisor/conf.d/apache2.conf
-ADD supervisord.php.conf /etc/supervisor/conf.d/php.conf
 
 EXPOSE 80/tcp

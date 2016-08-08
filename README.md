@@ -16,23 +16,17 @@ None.
 /
 ├─ etc/
 │  ├─ apache2/
-│  │  ├─ conf-available/
-│  │  │  └─ php5-fpm.conf
 │  │  └─ sites-available/
 │  │     └─ 000-default.conf
-│  ├─ php5/
-│  │  └─ fpm/
-│  │     └─ php.ini
 │  └─ supervisor/
 │     └─ config.d/
-│        ├─ apache2.conf
-│        ├─ fcgi.conf
-│        └─ php.conf
+│        └─ apache2.conf
 └─ var/
-   └─ hello/
-      ├─ hello.cgi
-      ├─ hello.html
-      └─ hello.php
+   └─ www/
+      └─ hello/
+         ├─ hello.cgi
+         ├─ hello.html
+         └─ hello.php
 ```
 
 ### Exposed Ports
