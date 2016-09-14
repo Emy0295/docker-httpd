@@ -1,4 +1,4 @@
-FROM apifocal/supervisord:latest
+FROM apifocal/base:latest
 MAINTAINER Alexandru Zbarcea <alexz@apache.org>
 
 # Install packages, download files ...
@@ -13,12 +13,15 @@ RUN chown --recursive root:root /var/www/hello
 # Configure: httpd
 ADD default.apache2 /etc/apache2/sites-available/000-default.conf
 ADD default-ssl.apache2 /etc/apache2/sites-available/default-ssl.conf
-RUN a2enmod actions cgid ssl && \
-  a2ensite default-ssl
+RUN a2enmod actions cgid && \
+    a2ensite 000-default
 
 #TODO: add support for php-fastcgi
 
 # Configure: supervisor
-ADD supervisord.apache2.conf /etc/supervisor/conf.d/apache2.conf
+# ADD supervisord.apache2.conf /etc/supervisor/conf.d/apache2.conf
 
-EXPOSE 80/tcp 443/tcp
+EXPOSE 80/tcp
+
+CMD /bin/bash -c "source /etc/apache2/envvars" && exec /usr/sbin/apache2ctl -D FOREGROUND
+
